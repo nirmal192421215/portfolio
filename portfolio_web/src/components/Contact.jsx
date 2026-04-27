@@ -178,19 +178,37 @@ const Contact = () => {
     if (!validate.name(form.name) || !validate.email(form.email) || !validate.message(form.message)) return;
     setSending(true);
 
-    emailjs.sendForm('service_5g9q80l', 'template_79ah806', formRef.current, {
-      publicKey: 'Pa3KjH-MhypG5_676',
+    const payload = {
+      service_id: 'service_5g9q80l',
+      template_id: 'template_79ah806',
+      user_id: 'Pa3KjH-MhypG5_676',
+      template_params: {
+        name: form.name,
+        email: form.email,
+        message: form.message
+      }
+    };
+
+    fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     })
-      .then(() => { 
-        console.log('Email sent successfully!');
-        setSending(false); 
-        setSent(true); 
-        setForm({ name: '', email: '', message: '' }); 
+      .then(async (res) => {
+        if (res.ok) {
+          console.log('Email sent successfully!');
+          setSending(false);
+          setSent(true);
+          setForm({ name: '', email: '', message: '' });
+        } else {
+          const errText = await res.text();
+          throw new Error(errText);
+        }
       })
-      .catch((error) => { 
-        setSending(false); 
-        console.error('EmailJS Detailed Error:', error);
-        alert('Failed to send. Please try again.'); 
+      .catch((error) => {
+        setSending(false);
+        console.error('EmailJS Direct Error:', error.message);
+        alert(`Failed to send: ${error.message}`);
       });
   };
 
