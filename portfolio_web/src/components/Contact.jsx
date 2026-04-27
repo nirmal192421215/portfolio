@@ -177,15 +177,28 @@ const Contact = () => {
     if (!validate.name(form.name) || !validate.email(form.email) || !validate.message(form.message)) return;
     setSending(true);
 
+    console.log('Sending email with:', {
+      service: 'service_5g9q80l',
+      template: 'template_79ah806',
+      params: { name: form.name, email: form.email, message: form.message }
+    });
+
     emailjs.send('service_5g9q80l', 'template_79ah806', {
       name:    form.name,
       email:   form.email,
       message: form.message,
-    }, 'Pa3KjH-MhypG5_676')
-      .then(() => { setSending(false); setSent(true); setForm({ name: '', email: '', message: '' }); })
+    }, {
+      publicKey: 'Pa3KjH-MhypG5_676',
+    })
+      .then(() => { 
+        console.log('Email sent successfully!');
+        setSending(false); 
+        setSent(true); 
+        setForm({ name: '', email: '', message: '' }); 
+      })
       .catch((error) => { 
         setSending(false); 
-        console.error('EmailJS Error:', error);
+        console.error('EmailJS Detailed Error:', error);
         alert('Failed to send. Please try again.'); 
       });
   };
