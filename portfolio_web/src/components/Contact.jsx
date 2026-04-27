@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 
@@ -161,6 +161,7 @@ const Contact = () => {
   const [touched, setTouched] = useState({ name: false, email: false, message: false });
   const [sent, setSent]       = useState(false);
   const [sending, setSending] = useState(false);
+  const formRef = useRef();
 
   useEffect(() => {
     emailjs.init('Pa3KjH-MhypG5_676');
@@ -177,17 +178,7 @@ const Contact = () => {
     if (!validate.name(form.name) || !validate.email(form.email) || !validate.message(form.message)) return;
     setSending(true);
 
-    console.log('Sending email with:', {
-      service: 'service_5g9q80l',
-      template: 'template_79ah806',
-      params: { name: form.name, email: form.email, message: form.message }
-    });
-
-    emailjs.send('service_5g9q80l', 'template_79ah806', {
-      name:    form.name,
-      email:   form.email,
-      message: form.message,
-    }, {
+    emailjs.sendForm('service_5g9q80l', 'template_79ah806', formRef.current, {
       publicKey: 'Pa3KjH-MhypG5_676',
     })
       .then(() => { 
@@ -308,7 +299,7 @@ const Contact = () => {
                 </button>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="glass-card gradient-border rounded-2xl p-8 space-y-5" noValidate>
+              <form ref={formRef} onSubmit={handleSubmit} className="glass-card gradient-border rounded-2xl p-8 space-y-5" noValidate>
                 <Field label="Your Name"  name="name"    value={form.name}    onChange={handleChange} touched={touched.name} />
                 <Field label="Email"      name="email"   type="email" value={form.email}   onChange={handleChange} touched={touched.email} />
                 <Field label="Message"    name="message" rows={5}     value={form.message} onChange={handleChange} touched={touched.message} />
