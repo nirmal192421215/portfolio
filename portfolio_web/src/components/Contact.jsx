@@ -162,6 +162,10 @@ const Contact = () => {
   const [sent, setSent]       = useState(false);
   const [sending, setSending] = useState(false);
 
+  useEffect(() => {
+    emailjs.init('Pa3KjH-MhypG5_676');
+  }, []);
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setTouched({ ...touched, [e.target.name]: true });
@@ -179,7 +183,11 @@ const Contact = () => {
       message: form.message,
     }, 'Pa3KjH-MhypG5_676')
       .then(() => { setSending(false); setSent(true); setForm({ name: '', email: '', message: '' }); })
-      .catch(() => { setSending(false); alert('Failed to send. Please try again.'); });
+      .catch((error) => { 
+        setSending(false); 
+        console.error('EmailJS Error:', error);
+        alert('Failed to send. Please try again.'); 
+      });
   };
 
   return (
