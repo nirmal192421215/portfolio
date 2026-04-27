@@ -173,11 +173,10 @@ const Contact = () => {
     if (!validate.name(form.name) || !validate.email(form.email) || !validate.message(form.message)) return;
     setSending(true);
 
-    emailjs.send('service_oav3hkh', 'template_yy1bwkt', {
-      from_name:  form.name,
-      from_email: form.email,
-      message:    form.message,
-      to_name:    'Nirmal Kumar',
+    emailjs.send('service_5g9q80l', 'template_79ah806', {
+      name:    form.name,
+      email:   form.email,
+      message: form.message,
     }, 'Pa3KjH-MhypG5_676')
       .then(() => { setSending(false); setSent(true); setForm({ name: '', email: '', message: '' }); })
       .catch(() => { setSending(false); alert('Failed to send. Please try again.'); });
