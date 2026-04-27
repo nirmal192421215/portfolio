@@ -180,7 +180,7 @@ const Contact = () => {
 
     const payload = {
       service_id: 'service_5g9q80l',
-      template_id: 'template_79ah806',
+      template_id: 'template_zoypfo6',
       user_id: 'Pa3KjH-MhypG5_676',
       template_params: {
         name: form.name,
