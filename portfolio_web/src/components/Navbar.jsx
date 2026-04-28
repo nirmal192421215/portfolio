@@ -50,13 +50,15 @@ const Navbar = () => {
         {/* Logo */}
         <motion.button
           onClick={() => go('#hero')}
-          className="font-display font-black text-lg tracking-tight"
+          className="flex items-center"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <span className="neon-text">NK</span>
-          <span style={{ color: 'rgba(255,255,255,0.25)' }}>.</span>
-          <span className="text-white/80">dev</span>
+          <img 
+            src="/logo.png" 
+            alt="DND Logo" 
+            className="h-10 w-auto object-contain brightness-110 drop-shadow-[0_0_15px_rgba(0,245,255,0.3)]"
+          />
         </motion.button>
 
         {/* Desktop nav */}
