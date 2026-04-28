@@ -50,15 +50,11 @@ const Navbar = () => {
         {/* Logo */}
         <motion.button
           onClick={() => go('#hero')}
-          className="flex items-center"
+          className="flex items-center gap-2"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <img 
-            src="/logo.png" 
-            alt="DND Logo" 
-            className="h-10 w-auto object-contain brightness-110 drop-shadow-[0_0_15px_rgba(0,245,255,0.3)]"
-          />
+          <img src="/logo.png" alt="NK Logo" className="h-10 w-auto" />
         </motion.button>
 
         {/* Desktop nav */}

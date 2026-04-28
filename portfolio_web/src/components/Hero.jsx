@@ -105,10 +105,10 @@ const Hero = () => {
           >
             <TypeAnimation
               sequence={[
-                'Design', 2000,
-                'Network', 2000,
-                'Development', 2000,
-                'DND Official', 2000,
+                'Full Stack Dev', 2000,
+                'AI integrated web application', 2000,
+                'Real-time Systems', 2000,
+                'Problem Solver', 2000,
               ]}
               wrapper="span"
               repeat={Infinity}

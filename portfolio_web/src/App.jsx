@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Lenis from 'lenis';
 import LoadingScreen from './components/LoadingScreen';
-import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -43,7 +42,7 @@ function App() {
           <div className="bg-grid" />
           <div className="bg-grain" />
           
-          <CustomCursor />
+
           <ScrollProgress />
           <BackToTop />
           <Navbar />
