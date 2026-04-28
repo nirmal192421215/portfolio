@@ -106,7 +106,7 @@ const Hero = () => {
             <TypeAnimation
               sequence={[
                 'Full Stack Dev', 2000,
-                'AI Builder', 2000,
+                'AI integrated web application', 2000,
                 'Real-time Systems', 2000,
                 'Problem Solver', 2000,
               ]}
