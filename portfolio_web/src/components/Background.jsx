@@ -18,131 +18,238 @@ const Background = () => {
     window.addEventListener('resize', resize);
 
     // ── Layer 1: Foreground (slow, larger) ─────────────────
-    const NODE_COUNT = 40;
-    const CIRCUIT_COUNT = 15;
-    const nodes = [];
-    const circuits = [];
+    const FG_COUNT = 100;
+    const BG_COUNT = 150;
+    const STAR_COUNT = 200; // New star layer
+    const CONNECTION_DIST = 160;
 
-    const createNode = () => ({
+    // Parallax state
+    const parallax = { x: 0, y: 0 };
+    const targetParallax = { x: 0, y: 0 };
+
+    // Data pulse state
+    let pulses = [];
+
+    const createParticle = (layer) => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      z: Math.random() * 0.5 + 0.5,
-      size: Math.random() * 3 + 2,
-      pulse: Math.random() * Math.PI * 2,
-      color: Math.random() > 0.5 ? '#00F5FF' : '#7C3AED'
+      vx: (Math.random() - 0.5) * (layer === 'bg' ? 0.4 : 0.2),
+      vy: (Math.random() - 0.5) * (layer === 'bg' ? 0.4 : 0.2),
+      size: layer === 'bg' ? Math.random() * 1.2 + 0.5 : Math.random() * 2.2 + 1.2,
+      hue: Math.random() * 360,
+      hueSpeed: (Math.random() - 0.5) * 0.4,
+      twinkleSpeed: Math.random() * 0.08 + 0.03,
+      twinkleOffset: Math.random() * Math.PI * 2,
+      layer,
     });
 
-    const createCircuit = () => ({
+    const fgParticles = Array.from({ length: FG_COUNT }, () => createParticle('fg'));
+    const bgParticles = Array.from({ length: BG_COUNT }, () => createParticle('bg'));
+    
+    // Distant drifting stars
+    const stars = Array.from({ length: STAR_COUNT }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      length: Math.random() * 200 + 100,
-      speed: Math.random() * 2 + 1,
-      vertical: Math.random() > 0.5,
+      size: Math.random() * 1.0 + 0.2,
+      speed: Math.random() * 0.3 + 0.1,
       opacity: Math.random() * 0.5 + 0.2
-    });
+    }));
 
-    for (let i = 0; i < NODE_COUNT; i++) nodes.push(createNode());
-    for (let i = 0; i < CIRCUIT_COUNT; i++) circuits.push(createCircuit());
+    // ── Shooting stars ─────────────────────────────────────
+    let shootingStars = [];
+    const spawnStar = () => {
+      shootingStars.push({
+        x: Math.random() * canvas.width * 0.8,
+        y: Math.random() * canvas.height * 0.5,
+        vx: 8 + Math.random() * 8,
+        vy: 3 + Math.random() * 5,
+        life: 1.0,
+        length: 120 + Math.random() * 120,
+      });
+    };
+    let nextStarIn = 120 + Math.random() * 250;
 
-    const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
-    const onMouseMove = (e) => {
-      mouse.tx = (e.clientX - canvas.width / 2) * 0.05;
-      mouse.ty = (e.clientY - canvas.height / 2) * 0.05;
+    const mouse = { x: null, y: null };
+    const onMouseMove = (e) => { 
+      mouse.x = e.clientX; 
+      mouse.y = e.clientY; 
+      targetParallax.x = (e.clientX - window.innerWidth / 2) * 0.12;
+      targetParallax.y = (e.clientY - window.innerHeight / 2) * 0.12;
     };
     window.addEventListener('mousemove', onMouseMove);
 
-    const drawGrid = (offsetY, opacity, scale = 1) => {
-      ctx.beginPath();
-      ctx.strokeStyle = `rgba(0, 245, 255, ${opacity})`;
-      ctx.lineWidth = 1;
+    const getParticleColor = (p, alphaMult = 1) => {
+      const h = ((p.hue + frame * p.hueSpeed * 0.1) % 360 + 360) % 360;
+      const twinkle = (Math.sin(frame * p.twinkleSpeed + p.twinkleOffset) + 1) / 2;
+      const opacity = (p.layer === 'bg' ? 0.3 : 0.75) + (twinkle * 0.25);
       
-      const spacing = 60 * scale;
-      const scrollX = (mouse.x * 0.5) % spacing;
-      const scrollY = (offsetY + mouse.y * 0.5) % spacing;
-
-      for (let x = scrollX - spacing; x < canvas.width + spacing; x += spacing) {
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, canvas.height);
-      }
-      for (let y = scrollY - spacing; y < canvas.height + spacing; y += spacing) {
-        ctx.moveTo(0, y);
-        ctx.lineTo(canvas.width, y);
-      }
-      ctx.stroke();
+      if (h < 120)      return `hsla(${180 + h * 0.2}, 100%, 80%, ${opacity * alphaMult})`;
+      else if (h < 240) return `hsla(${260 + (h - 120) * 0.2}, 90%, 75%, ${opacity * alphaMult})`;
+      else              return `hsla(${340 + (h - 240) * 0.1}, 100%, 75%, ${opacity * alphaMult})`;
     };
 
-    const drawCircuits = () => {
-      circuits.forEach(c => {
-        ctx.beginPath();
-        ctx.strokeStyle = `rgba(0, 245, 255, ${c.opacity})`;
-        ctx.lineWidth = 2;
+    const drawStars = () => {
+      stars.forEach(s => {
+        s.x -= s.speed; // Continuous drift
+        if (s.x < 0) s.x = canvas.width;
         
-        if (c.vertical) {
-          c.y += c.speed;
-          if (c.y > canvas.height) c.y = -c.length;
-          ctx.moveTo(c.x, c.y);
-          ctx.lineTo(c.x, c.y + c.length);
-        } else {
-          c.x += c.speed;
-          if (c.x > canvas.width) c.x = -c.length;
-          ctx.moveTo(c.x, c.y);
-          ctx.lineTo(c.x + c.length, c.y);
-        }
-        ctx.stroke();
+        const ex = s.x + parallax.x * 0.2;
+        const ey = s.y + parallax.y * 0.2;
         
-        // Circuit head
         ctx.beginPath();
-        ctx.arc(c.vertical ? c.x : c.x + c.length, c.vertical ? c.y + c.length : c.y, 3, 0, Math.PI * 2);
-        ctx.fillStyle = '#00F5FF';
+        ctx.arc(ex, ey, s.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${s.opacity})`;
         ctx.fill();
       });
     };
 
-    const drawNodes = () => {
-      nodes.forEach(n => {
-        n.pulse += 0.05;
-        const pSize = n.size + Math.sin(n.pulse) * 2;
-        const nx = n.x + mouse.x * n.z;
-        const ny = n.y + mouse.y * n.z;
+    const drawParticleLayer = (particles, alpha = 1, parallaxScale = 1) => {
+      particles.forEach((p, i) => {
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+
+        const ex = p.x + parallax.x * parallaxScale;
+        const ey = p.y + parallax.y * parallaxScale;
+
+        if (mouse.x !== null) {
+          const dx = ex - mouse.x;
+          const dy = ey - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (dist < 220 && dist > 70) {
+            const force = (220 - dist) / 220 * 1.5;
+            p.x += (dx / dist) * force;
+            p.y += (dy / dist) * force;
+          } else if (dist < 70 && p.layer === 'fg') {
+            const force = (70 - dist) / 70 * 0.6;
+            p.x -= (dx / dist) * force;
+            p.y -= (dy / dist) * force;
+          }
+
+          if (p.layer === 'fg' && dist < 220) {
+            ctx.beginPath();
+            ctx.moveTo(ex, ey);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = `rgba(0, 245, 255, ${0.4 * (1 - dist / 220)})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+
+        if (p.layer === 'fg') {
+          let connectionCount = 0;
+          for (let j = i + 1; j < particles.length; j++) {
+            if (connectionCount >= 4) break;
+            
+            const p2 = particles[j];
+            const dx = p.x - p2.x;
+            const dy = p.y - p2.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            
+            if (dist < CONNECTION_DIST) {
+              const ex2 = p2.x + parallax.x * parallaxScale;
+              const ey2 = p2.y + parallax.y * parallaxScale;
+
+              ctx.beginPath();
+              ctx.moveTo(ex, ey);
+              ctx.lineTo(ex2, ey2);
+              ctx.strokeStyle = `rgba(255, 255, 255, ${0.15 * (1 - dist / CONNECTION_DIST)})`;
+              ctx.lineWidth = 0.6;
+              ctx.stroke();
+              connectionCount++;
+
+              if (frame % 40 === 0 && Math.random() < 0.005) {
+                pulses.push({
+                  p1: p, p2: p2,
+                  progress: 0,
+                  speed: 0.008 + Math.random() * 0.015,
+                  color: getParticleColor(p, 1)
+                });
+              }
+            }
+          }
+        }
 
         ctx.beginPath();
-        ctx.arc(nx, ny, pSize, 0, Math.PI * 2);
-        ctx.fillStyle = n.color;
-        ctx.shadowBlur = 15;
-        ctx.shadowColor = n.color;
+        ctx.arc(ex, ey, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = getParticleColor(p, alpha);
         ctx.fill();
-        ctx.shadowBlur = 0;
 
-        // Connections
-        nodes.forEach(n2 => {
-          const dx = n.x - n2.x;
-          const dy = n.y - n2.y;
+        // Mouse Aura highlight (reduced)
+        if (mouse.x !== null) {
+          const dx = ex - mouse.x;
+          const dy = ey - mouse.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 150) {
             ctx.beginPath();
-            ctx.moveTo(nx, ny);
-            ctx.lineTo(n2.x + mouse.x * n2.z, n2.y + mouse.y * n2.z);
-            ctx.strokeStyle = `rgba(255, 255, 255, ${0.1 * (1 - dist / 150)})`;
-            ctx.stroke();
+            ctx.arc(ex, ey, p.size * 2, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(0, 245, 255, ${(150 - dist) / 150 * 0.15})`;
+            ctx.fill();
           }
-        });
+        }
+      });
+    };
+
+    const drawPulses = () => {
+      pulses = pulses.filter(pulse => pulse.progress < 1);
+      pulses.forEach(pulse => {
+        pulse.progress += pulse.speed;
+        const px = pulse.p1.x + (pulse.p2.x - pulse.p1.x) * pulse.progress + parallax.x;
+        const py = pulse.p1.y + (pulse.p2.y - pulse.p1.y) * pulse.progress + parallax.y;
+        
+        ctx.beginPath();
+        ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = pulse.color;
+        ctx.shadowBlur = 8; // Reduced glow
+        ctx.shadowColor = pulse.color;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      });
+    };
+
+    const drawShootingStars = () => {
+      shootingStars = shootingStars.filter(s => s.life > 0);
+      shootingStars.forEach(s => {
+        const sx = s.x + parallax.x * 0.6;
+        const sy = s.y + parallax.y * 0.6;
+        const grad = ctx.createLinearGradient(sx, sy, sx - s.length, sy - s.length * 0.3);
+        grad.addColorStop(0, `rgba(255, 255, 255, ${s.life})`);
+        grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.beginPath();
+        ctx.moveTo(sx, sy);
+        ctx.lineTo(sx - s.length, sy - s.length * 0.3);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 2 * s.life;
+        ctx.stroke();
+        s.x += s.vx;
+        s.y += s.vy;
+        s.life -= 0.012;
       });
     };
 
     const draw = () => {
       frame++;
-      ctx.fillStyle = '#050510';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      mouse.x += (mouse.tx - mouse.x) * 0.1;
-      mouse.y += (mouse.ty - mouse.y) * 0.1;
+      parallax.x += (targetParallax.x - parallax.x) * 0.08;
+      parallax.y += (targetParallax.y - parallax.y) * 0.08;
 
-      // Layered Grids
-      drawGrid(frame * 0.5, 0.03, 0.8);
-      drawGrid(frame * 1, 0.05, 1.2);
+      drawStars();
+      drawParticleLayer(bgParticles, 0.5, 0.4);
+      drawParticleLayer(fgParticles, 1, 1);
+      drawPulses();
+      drawShootingStars();
 
-      drawCircuits();
-      drawNodes();
+      nextStarIn--;
+      if (nextStarIn <= 0) {
+        spawnStar();
+        nextStarIn = 150 + Math.random() * 300;
+      }
 
       animId = requestAnimationFrame(draw);
     };
@@ -157,25 +264,21 @@ const Background = () => {
 
   return (
     <div className="fixed inset-0 z-[-1] pointer-events-none bg-[#050510] overflow-hidden">
+      {/* ── Nebula Glows ─────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">
         <div
-          className="absolute top-0 left-0 w-full h-full opacity-[0.15]"
-          style={{
-            background: 'radial-gradient(circle at 20% 30%, rgba(0,245,255,0.15) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(124,58,237,0.15) 0%, transparent 50%)'
-          }}
+          className="absolute top-0 left-0 w-[900px] h-[900px] rounded-full blur-[160px] opacity-[0.05] animate-pulse"
+          style={{ background: 'radial-gradient(circle, rgba(0,245,255,1), transparent)', transform: 'translate(-25%, -25%)' }}
         />
-        {/* Scanning Line */}
-        <div className="absolute w-full h-[2px] bg-gradient-to-r from-transparent via-[#00F5FF] to-transparent opacity-20 animate-scan top-0" />
+        <div
+          className="absolute top-1/2 right-0 w-[1100px] h-[1100px] rounded-full blur-[200px] opacity-[0.04] animate-pulse"
+          style={{ background: 'radial-gradient(circle, rgba(124,58,237,1), transparent)', transform: 'translate(30%, -45%)', animationDelay: '1.5s' }}
+        />
+        <div
+          className="absolute bottom-0 left-1/2 w-[800px] h-[800px] rounded-full blur-[140px] opacity-[0.03] animate-pulse"
+          style={{ background: 'radial-gradient(circle, rgba(255,45,107,1), transparent)', transform: 'translate(-50%, 25%)', animationDelay: '3s' }}
+        />
       </div>
-      <style>{`
-        @keyframes scan {
-          0% { top: -10%; }
-          100% { top: 110%; }
-        }
-        .animate-scan {
-          animation: scan 8s linear infinite;
-        }
-      `}</style>
       <canvas ref={canvasRef} className="absolute inset-0" />
     </div>
   );
