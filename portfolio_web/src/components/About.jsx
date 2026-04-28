@@ -62,7 +62,7 @@ const stats = [
   { raw: '2',  suffix: '+', label: 'Hackathons' },
   { raw: '5',  suffix: '+', label: 'Projects Built' },
   { raw: '4',  suffix: '+', label: 'Certifications' },
-  { raw: '∞',  suffix: '',  label: 'Coffee Consumed' },
+  { raw: '3',  suffix: '+', label: 'AI Integrations' },
 ];
 
 /* ── Timeline ──────────────────────────────────────────────── */
