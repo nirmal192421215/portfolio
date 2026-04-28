@@ -50,26 +50,44 @@ const Navbar = () => {
         {/* Logo */}
         <motion.button
           onClick={() => go('#hero')}
-          className="flex items-center gap-2"
-          whileHover={{ scale: 1.05 }}
+          className="flex items-center gap-3 glass px-4 py-2 rounded-xl border border-white/10"
+          whileHover={{ scale: 1.05, border: '1px solid rgba(0,245,255,0.3)' }}
           whileTap={{ scale: 0.95 }}
         >
           <div className="relative w-10 h-10 flex items-center justify-center">
-            <svg viewBox="0 0 40 40" className="w-full h-full">
-              <polygon
+            <svg viewBox="0 0 40 40" className="w-full h-full drop-shadow-[0_0_8px_rgba(0,245,255,0.5)]">
+              {/* Animated Hexagon Border */}
+              <motion.polygon
+                points="20,2 37,11 37,29 20,38 3,29 3,11"
+                fill="none"
+                stroke="rgba(0,245,255,0.3)"
+                strokeWidth="1.5"
+              />
+              <motion.polygon
                 points="20,2 37,11 37,29 20,38 3,29 3,11"
                 fill="none"
                 stroke="url(#logoGrad)"
                 strokeWidth="2"
+                strokeDasharray="100"
+                animate={{ strokeDashoffset: [200, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
               />
-              <path
-                d="M12 28 L12 12 L22 28 L22 12 M28 28 L28 12 M28 20 L32 12 M28 20 L32 28"
-                stroke="white"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                fill="none"
-              />
+              
+              {/* NK Letters with Network Nodes */}
+              <g stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none">
+                <path d="M11 29 L11 11 L21 29 L21 11" />
+                <path d="M28 29 L28 11 M28 20 L33 11 M28 20 L33 29" />
+                {/* Joints/Nodes */}
+                <circle cx="11" cy="11" r="1.5" fill="#00F5FF" stroke="none" />
+                <circle cx="11" cy="29" r="1.5" fill="#00F5FF" stroke="none" />
+                <circle cx="21" cy="11" r="1.5" fill="#00F5FF" stroke="none" />
+                <circle cx="21" cy="29" r="1.5" fill="#00F5FF" stroke="none" />
+                <circle cx="28" cy="11" r="1.5" fill="#00F5FF" stroke="none" />
+                <circle cx="28" cy="29" r="1.5" fill="#00F5FF" stroke="none" />
+                <circle cx="33" cy="11" r="1.5" fill="#00F5FF" stroke="none" />
+                <circle cx="33" cy="29" r="1.5" fill="#00F5FF" stroke="none" />
+              </g>
+
               <defs>
                 <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
                   <stop offset="0%" stopColor="#00F5FF" />
@@ -78,9 +96,12 @@ const Navbar = () => {
               </defs>
             </svg>
           </div>
-          <span className="font-display font-bold text-xl tracking-tighter text-white">
-            NK<span className="text-[#00F5FF]">.</span>dev
-          </span>
+          <div className="flex flex-col items-start leading-none">
+            <span className="font-display font-black text-xl tracking-tighter text-white">
+              NK<span className="text-[#00F5FF]">.</span>
+            </span>
+            <span className="text-[10px] font-mono tracking-[0.2em] text-white/40 uppercase">Systems</span>
+          </div>
         </motion.button>
 
         {/* Desktop nav */}
