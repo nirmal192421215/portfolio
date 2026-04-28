@@ -54,7 +54,33 @@ const Navbar = () => {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <img src="/logo.png" alt="NK Logo" className="h-10 w-auto" />
+          <div className="relative w-10 h-10 flex items-center justify-center">
+            <svg viewBox="0 0 40 40" className="w-full h-full">
+              <polygon
+                points="20,2 37,11 37,29 20,38 3,29 3,11"
+                fill="none"
+                stroke="url(#logoGrad)"
+                strokeWidth="2"
+              />
+              <path
+                d="M12 28 L12 12 L22 28 L22 12 M28 28 L28 12 M28 20 L32 12 M28 20 L32 28"
+                stroke="white"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                fill="none"
+              />
+              <defs>
+                <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
+                  <stop offset="0%" stopColor="#00F5FF" />
+                  <stop offset="100%" stopColor="#7C3AED" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <span className="font-display font-bold text-xl tracking-tighter text-white">
+            NK<span className="text-[#00F5FF]">.</span>dev
+          </span>
         </motion.button>
 
         {/* Desktop nav */}
