@@ -53,7 +53,7 @@ const achievements = [
   },
   {
     icon: '🤖',
-    title: 'AI Application Builder',
+    title: 'AI-Integrated Web Apps',
     description: 'Shipped production-grade AI systems: MindMeter (wellness AI) and Krythion (focus AI).',
     color: '#00F5FF',
   },
