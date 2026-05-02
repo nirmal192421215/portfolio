@@ -1,16 +1,23 @@
-# React + Vite
+# Nirmal Kumar N — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A high-performance, premium portfolio built with React, Vite, and Framer Motion. Featuring glassmorphism, dynamic animations, and smooth scrolling.
 
-Currently, two official plugins are available:
+🚀 **Live Demo:** [https://nirmalkumar-portfolio.vercel.app/](https://nirmalkumar-portfolio.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tech Stack
+- **Frontend:** React 19, Vite, Tailwind CSS
+- **Animations:** Framer Motion, Lenis (Smooth Scroll)
+- **Icons:** Lucide React, React Icons
+- **Deployment:** Vercel
 
-## React Compiler
+## Key Features
+- **Modern Aesthetic:** Dark mode with premium glassmorphism and neon accents.
+- **Interactive UI:** Dynamic project cards with 3D hover effects.
+- **Responsive Design:** Optimized for all devices.
+- **SEO Optimized:** Meta tags and Open Graph support for social sharing.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting Started
+To run the project locally:
+1. Clone the repository.
+2. Install dependencies: `npm install`
+3. Start the dev server: `npm run dev`

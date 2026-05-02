@@ -12,6 +12,8 @@ import Footer from './components/Footer';
 import { ScrollProgress, BackToTop } from './components/ScrollUtils';
 
 import Background from './components/Background';
+import CustomCursor from './components/CustomCursor';
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -38,6 +40,7 @@ function App() {
       {!loaded && <LoadingScreen onComplete={() => setLoaded(true)} />}
       {loaded && (
         <div className="min-h-screen relative">
+          <CustomCursor />
           <Background />
           <div className="bg-grid" />
           <div className="bg-grain" />

@@ -38,6 +38,7 @@ const Footer = () => {
             {[
               { label: 'GitHub', url: 'https://github.com/nirmal192421215' },
               { label: 'LinkedIn', url: 'https://www.linkedin.com/in/nirmalkumar-n/' },
+              { label: 'Resume', url: '/resume.pdf' },
               { label: 'Contact', url: 'mailto:nirmalkumar00727@gmail.com' }
             ].map((link) => {
               const isMail = link.url.startsWith('mailto:');

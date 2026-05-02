@@ -153,6 +153,15 @@ const Hero = () => {
           >
             Contact Me
           </motion.button>
+          <motion.a
+            href="/resume.pdf"
+            download
+            className="btn-ghost w-full sm:w-auto px-8 py-3.5 rounded-full font-semibold text-white/80 text-base flex items-center justify-center gap-2"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.96 }}
+          >
+            Download CV ↓
+          </motion.a>
         </motion.div>
 
         {/* ── Animated Stats ── */}
