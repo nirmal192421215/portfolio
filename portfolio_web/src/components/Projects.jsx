@@ -26,7 +26,7 @@ const projects = [
       { icon: '⚡', text: 'Real-time WebSocket system' },
       { icon: '🎮', text: 'Gamification & reward system' },
     ],
-    live:   'https://krythion-frontend-production.up.railway.app/focus',
+    live:   'https://nk-krythion-app.vercel.app/',
     github: 'https://github.com/nirmal192421215/NK-krythion-app',
     image:  '/projects/krythion_official_square.jpg',
     accent: '#00F5FF',
