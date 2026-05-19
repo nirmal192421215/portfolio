@@ -20,12 +20,12 @@ const Counter = ({ to, suffix = '', label }) => {
     <div className="flex flex-col items-center gap-1">
       <span
         ref={ref}
-        className="font-display font-black neon-text"
-        style={{ fontSize: 'clamp(1.6rem, 4vw, 2.4rem)' }}
+        className="font-display font-black neon-text leading-none"
+        style={{ fontSize: 'clamp(1.3rem, 5vw, 2.4rem)' }}
       >
         0{suffix}
       </span>
-      <span className="font-mono text-[11px] uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.35)' }}>
+      <span className="font-mono text-[9px] sm:text-[11px] uppercase tracking-widest text-center" style={{ color: 'rgba(255,255,255,0.35)' }}>
         {label}
       </span>
     </div>
@@ -70,20 +70,20 @@ const Hero = () => {
   const go = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-28 pb-12 sm:pt-0 sm:pb-0">
       <HeroOrb />
 
-      <div className="relative z-10 section-container text-center px-4">
+      <div className="relative z-10 section-container text-center px-4 flex flex-col items-center justify-center flex-1 w-full">
         {/* Status badge */}
         <motion.div
-          className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full font-mono text-xs mb-10"
+          className="inline-flex items-center gap-2 glass px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-mono text-[8px] sm:text-xs mb-8 sm:mb-10 max-w-full"
           style={{ color: 'rgba(255,255,255,0.55)' }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.6 }}
         >
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]" />
-          Available for opportunities · Chennai, India
+          <span className="shrink-0 w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]" />
+          <span className="truncate">Available for opportunities · Chennai, India</span>
         </motion.div>
 
         {/* Headline with glitch */}
@@ -93,15 +93,16 @@ const Hero = () => {
           transition={{ delay: 0.5, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
         >
           <h1
-            className="font-display font-black leading-tight mb-4"
-            style={{ fontSize: 'clamp(2.8rem, 8vw, 6rem)' }}
+            className="font-display font-black leading-[1.05] mb-3 sm:mb-4 px-2"
+            style={{ fontSize: 'clamp(2rem, 9vw, 6rem)' }}
           >
             <span className="text-white">Hi, I'm </span>
+            <br className="sm:hidden" />
             <HeroName />
           </h1>
           <div
-            className="font-display font-bold mb-6 flex items-center justify-center"
-            style={{ fontSize: 'clamp(1.2rem, 3.5vw, 2.5rem)', height: '3rem', color: 'rgba(255,255,255,0.85)' }}
+            className="font-display font-bold mb-4 sm:mb-6 flex items-center justify-center text-center px-4 w-full"
+            style={{ fontSize: 'clamp(1rem, 5vw, 2.2rem)', minHeight: '2.2rem', color: 'rgba(255,255,255,0.85)' }}
           >
             <TypeAnimation
               sequence={[
@@ -119,8 +120,8 @@ const Hero = () => {
 
         {/* Sub */}
         <motion.p
-          className="max-w-xl mx-auto mb-10 leading-relaxed"
-          style={{ color: 'rgba(255,255,255,0.48)', fontSize: 'clamp(0.95rem, 2vw, 1.15rem)' }}
+          className="max-w-xl mx-auto mb-8 sm:mb-10 leading-relaxed px-4 text-center text-sm sm:text-base"
+          style={{ color: 'rgba(255,255,255,0.48)', fontSize: 'clamp(0.88rem, 2.5vw, 1.05rem)' }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.75 }}
@@ -130,14 +131,14 @@ const Hero = () => {
 
         {/* CTAs */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-10 sm:mb-16 w-full px-4 sm:px-0"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.92 }}
         >
           <motion.button
             onClick={() => go('projects')}
-            className="btn-primary w-full sm:w-auto px-8 py-3.5 rounded-full font-semibold text-white text-base relative z-10 overflow-hidden"
+            className="btn-primary w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-white text-sm relative z-10 overflow-hidden"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.96 }}
           >
@@ -147,7 +148,7 @@ const Hero = () => {
           </motion.button>
           <motion.button
             onClick={() => go('contact')}
-            className="btn-outline w-full sm:w-auto px-8 py-3.5 rounded-full font-semibold text-white/80 text-base"
+            className="btn-outline w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-white/80 text-sm"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.96 }}
           >
@@ -156,31 +157,37 @@ const Hero = () => {
           <motion.a
             href="/resume.pdf"
             download
-            className="btn-ghost w-full sm:w-auto px-8 py-3.5 rounded-full font-semibold text-white/80 text-base flex items-center justify-center gap-2"
+            className="btn-ghost w-full sm:w-auto px-7 py-3.5 rounded-full font-semibold text-white/80 text-sm flex items-center justify-center gap-2"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.96 }}
           >
-            Download CV ↓
+            Resume ↓
           </motion.a>
         </motion.div>
 
         {/* ── Animated Stats ── */}
         <motion.div
-          className="flex items-center justify-center gap-10 sm:gap-16"
+          className="grid grid-cols-3 gap-4 sm:flex sm:items-center sm:justify-center sm:gap-16 px-4 sm:px-4 mt-8 mb-4 w-full max-w-xs sm:max-w-none mx-auto"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.8 }}
         >
-          <Counter to={2} suffix="+" label="Projects Shipped" />
-          <div className="w-px h-10 rounded-full" style={{ background: 'rgba(255,255,255,0.1)' }} />
-          <Counter to={5} label="Certifications" />
-          <div className="w-px h-10 rounded-full" style={{ background: 'rgba(255,255,255,0.1)' }} />
-          <Counter to={2026} label="Building Since" />
+          <div className="flex flex-col items-center">
+            <Counter to={2} suffix="+" label="Projects" />
+          </div>
+          <div className="hidden sm:block w-px h-10 rounded-full" style={{ background: 'rgba(255,255,255,0.1)' }} />
+          <div className="flex flex-col items-center">
+            <Counter to={5} label="Certs" />
+          </div>
+          <div className="hidden sm:block w-px h-10 rounded-full" style={{ background: 'rgba(255,255,255,0.1)' }} />
+          <div className="flex flex-col items-center">
+            <Counter to={2026} label="Since" />
+          </div>
         </motion.div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator - desktop only */}
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          className="hidden sm:flex absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2"
           style={{ color: 'rgba(255,255,255,0.25)' }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

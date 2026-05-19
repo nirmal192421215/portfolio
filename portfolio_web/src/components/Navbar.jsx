@@ -40,7 +40,7 @@ const Navbar = () => {
   return (
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'glass border-b border-white/[0.06] py-3' : 'py-5 bg-transparent'
+        scrolled ? 'glass border-b border-white/[0.06] py-2 sm:py-3' : 'py-3 sm:py-5 bg-transparent'
       }`}
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -55,11 +55,11 @@ const Navbar = () => {
           whileTap={{ scale: 0.98 }}
         >
           <div className="flex items-center">
-            <span className="font-display font-black text-2xl tracking-tighter text-white">
+            <span className="font-display font-black text-xl sm:text-2xl tracking-tighter text-white">
               NK
             </span>
-            <span className="w-1.5 h-1.5 rounded-full bg-[#00F5FF] mx-1 mt-2 shadow-[0_0_8px_#00F5FF]" />
-            <span className="font-display font-medium text-2xl tracking-tighter text-white/70 group-hover:text-white transition-colors">
+            <span className="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#00F5FF] mx-1 mt-1 sm:mt-2 shadow-[0_0_8px_#00F5FF]" />
+            <span className="font-display font-medium text-xl sm:text-2xl tracking-tighter text-white/70 group-hover:text-white transition-colors">
               dev
             </span>
           </div>
@@ -104,7 +104,7 @@ const Navbar = () => {
 
         {/* Mobile burger */}
         <button
-          className="md:hidden relative z-[70] p-2 text-white/70 hover:text-white"
+          className="md:hidden relative z-[200] p-2.5 -mr-1 text-white/70 hover:text-white rounded-lg"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -116,34 +116,45 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile drawer */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className="fixed inset-0 z-60 md:hidden flex flex-col items-center justify-center gap-6"
-            style={{ background: 'rgba(5,5,16,0.97)', backdropFilter: 'blur(24px)' }}
+            className="fixed inset-0 z-[150] md:hidden flex flex-col items-center justify-center gap-8"
+            style={{ background: 'rgba(5,5,16,0.97)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)' }}
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', stiffness: 260, damping: 30 }}
           >
+            {/* Close tap area at top */}
+            <div className="absolute top-4 right-4">
+              <button
+                onClick={() => setMenuOpen(false)}
+                className="p-3 text-white/50 hover:text-white"
+                aria-label="Close menu"
+              >
+                <span className="text-2xl leading-none">✕</span>
+              </button>
+            </div>
+
             {navLinks.map((link, i) => (
               <motion.button
                 key={link.label}
                 onClick={() => go(link.href)}
-                className={`text-3xl font-display font-bold ${
+                className={`text-2xl sm:text-3xl font-display font-bold tracking-tight ${
                   active === link.href.replace('#','') ? 'neon-text' : 'text-white/60'
                 }`}
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.07 }}
+                whileTap={{ scale: 0.95 }}
               >
                 {link.label}
               </motion.button>
             ))}
             <motion.a
               href="/resume.pdf" download
-              className="btn-primary mt-2 px-8 py-3 rounded-full text-white font-bold relative z-10"
+              className="btn-primary mt-2 px-8 py-3.5 rounded-full text-white font-bold relative z-10"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.45 }}

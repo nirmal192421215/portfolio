@@ -98,7 +98,8 @@ const StatItem = ({ stat, index }) => {
       whileHover={{ scale: 1.04 }}
     >
       <div className="font-display font-black neon-text mb-1"
-        style={{ fontSize: 'clamp(2rem, 4vw, 2.75rem)' }}>
+        style={{ fontSize: 'clamp(1.6rem, 4vw, 2.75rem)' }}>
+
         {stat.raw === '∞' ? '∞' : value}{stat.suffix}
       </div>
       <div className="font-mono text-xs uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.4)' }}>
@@ -113,32 +114,33 @@ const About = () => {
   const timelineRef = useRef(null);
 
   return (
-    <section id="about" className="py-20 lg:py-32 relative">
+    <section id="about" className="py-16 sm:py-24 lg:py-32 relative">
       {/* bg glow */}
       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-80 h-80 rounded-full opacity-[0.06] blur-3xl pointer-events-none"
         style={{ background: 'radial-gradient(circle, #7C3AED, transparent)' }} />
 
       <div className="section-container">
         {/* Label */}
-        <motion.div className="flex items-center gap-3 mb-4"
+        <motion.div className="flex items-center gap-3 mb-6 sm:mb-4"
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <span className="font-mono text-sm" style={{ color: '#00F5FF' }}>01.</span>
-          <span className="font-mono text-sm uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.35)' }}>About Me</span>
+          <span className="font-mono text-xs sm:text-sm" style={{ color: '#00F5FF' }}>01.</span>
+          <span className="font-mono text-[10px] sm:text-sm uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.35)' }}>About Me</span>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-start">
           {/* LEFT */}
           <div>
             <motion.h2
-              className="font-display font-black text-white mb-6 leading-tight"
-              style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)' }}
+              className="font-display font-black text-white mb-6 sm:mb-6 leading-[1.15]"
+              style={{ fontSize: 'clamp(1.6rem, 6vw, 3rem)' }}
               variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
             >
               A builder who loves{' '}
+              <br className="sm:hidden" />
               <span className="neon-text">turning ideas into reality</span>
             </motion.h2>
 
-            <div className="space-y-4 mb-12">
+            <div className="space-y-4 mb-10 text-sm sm:text-base leading-relaxed">
               {[
                 "I'm Nirmal Kumar N, a B.Tech Information Technology student from SIMATS Engineering, Thandalam. Coming from Chennai, I'm passionate about the intersection of AI and real-world problem solving.",
                 "I started my engineering journey in 2024. In September 2025, I began mastering Java, which evolved into building comprehensive systems like MindMeter and Krythion in early 2026.",
@@ -163,7 +165,7 @@ const About = () => {
               Journey So Far
             </motion.h3>
 
-            <div ref={timelineRef} className="relative ml-2 space-y-8">
+            <div ref={timelineRef} className="relative ml-4 space-y-7">
               {/* Animated connector line */}
               <motion.div
                 className="absolute left-0 top-0 w-px"
@@ -222,9 +224,9 @@ const About = () => {
           </div>
 
           {/* RIGHT */}
-          <div className="space-y-5 lg:sticky lg:top-28">
+          <div className="space-y-4 lg:sticky lg:top-28">
             {/* Stats grid with count-up */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-3">
               {stats.map((stat, i) => (
                 <StatItem key={stat.label} stat={stat} index={i} />
               ))}

@@ -161,7 +161,7 @@ const fadeUp = {
 
 const Certifications = () => {
   return (
-    <section id="certifications" className="py-20 lg:py-32 relative overflow-hidden">
+    <section id="certifications" className="py-16 sm:py-20 lg:py-32 relative overflow-hidden">
       {/* Background Accents */}
       <div className="absolute right-[-10%] top-1/4 w-[500px] h-[500px] rounded-full opacity-[0.03] blur-[120px] pointer-events-none"
         style={{ background: 'radial-gradient(circle, #00F5FF, transparent)' }} />
@@ -177,8 +177,8 @@ const Certifications = () => {
         </motion.div>
 
         <motion.h2
-          className="font-display font-black text-white mb-3"
-          style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)' }}
+          className="font-display font-black text-white mb-3 leading-tight"
+          style={{ fontSize: 'clamp(1.6rem, 6vw, 3.5rem)' }}
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           Academic &amp; <span className="neon-text">Technical Credentials</span>
         </motion.h2>
@@ -188,8 +188,8 @@ const Certifications = () => {
         </motion.p>
 
         {/* ── Cert Ribbon ── */}
-        <div className="cert-ribbon-container mb-24">
-          <div className="cert-ribbon pb-8">
+        <div className="cert-ribbon-container mb-10 sm:mb-16">
+          <div className="cert-ribbon pb-4 sm:pb-8">
             {certs.map((cert, i) => (
               <CertCard key={cert.title} cert={cert} index={i} />
             ))}
@@ -208,11 +208,11 @@ const Certifications = () => {
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
           {achievements.map((a, i) => (
             <motion.div
               key={a.title}
-              className="glass-card group relative overflow-hidden rounded-2xl p-8"
+              className="glass-card group relative overflow-hidden rounded-2xl p-6 sm:p-8"
               variants={fadeUp} custom={i}
               initial="hidden" whileInView="visible" viewport={{ once: true }}
               whileHover={{ y: -5 }}
@@ -223,7 +223,7 @@ const Certifications = () => {
               />
               
               <div
-                className="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mb-6 transition-transform duration-500 group-hover:rotate-[10deg]"
+                className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center text-2xl sm:text-3xl mb-4 sm:mb-6 transition-transform duration-500 group-hover:rotate-[10deg]"
                 style={{
                   background: `${a.color}12`,
                   border: `1px solid ${a.color}30`,

@@ -34,7 +34,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div className="flex items-center gap-8">
+          <div className="flex flex-wrap justify-center md:justify-end items-center gap-x-8 gap-y-4">
             {[
               { label: 'GitHub', url: 'https://github.com/nirmal192421215' },
               { label: 'LinkedIn', url: 'https://www.linkedin.com/in/nirmalkumar-n/' },

@@ -26,7 +26,7 @@ const AvailabilityBadge = () => {
 
   return (
     <motion.div
-      className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full font-mono text-xs"
+      className="inline-flex items-center gap-2.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-mono text-[10px] sm:text-xs"
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
       style={{
@@ -213,7 +213,7 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 lg:py-32 relative">
+    <section id="contact" className="py-16 sm:py-20 lg:py-32 relative">
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-56 opacity-[0.06] blur-3xl pointer-events-none"
         style={{ background: 'radial-gradient(ellipse, #00F5FF, transparent)' }} />
 
@@ -225,8 +225,8 @@ const Contact = () => {
         </motion.div>
 
         <motion.h2
-          className="font-display font-black text-white mb-3"
-          style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)' }}
+          className="font-display font-black text-white mb-3 leading-tight"
+          style={{ fontSize: 'clamp(1.8rem, 7vw, 3rem)' }}
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           Let's <span className="neon-text">Connect</span>
         </motion.h2>
@@ -241,20 +241,22 @@ const Contact = () => {
           <AvailabilityBadge />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-start">
           {/* LEFT */}
           <div>
             {/* Email */}
-            <motion.div className="glass-card gradient-border rounded-2xl p-6 mb-5"
+            <motion.div className="glass-card gradient-border rounded-2xl p-5 mb-4"
               variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
               <p className="font-mono text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.35)' }}>Email</p>
-              <a href="mailto:nirmalkumar00727@gmail.com" className="font-semibold hover:underline" style={{ color: '#00F5FF' }}>
+              <a href="mailto:nirmalkumar00727@gmail.com"
+                className="font-semibold hover:underline break-all text-sm sm:text-base"
+                style={{ color: '#00F5FF' }}>
                 nirmalkumar00727@gmail.com
               </a>
             </motion.div>
 
             {/* Location with radar */}
-            <motion.div className="glass-card gradient-border rounded-2xl p-6 mb-5"
+            <motion.div className="glass-card gradient-border rounded-2xl p-5 mb-4"
               variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
               <p className="font-mono text-xs uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.35)' }}>Location</p>
               <div className="flex items-center gap-4">
@@ -267,16 +269,16 @@ const Contact = () => {
             </motion.div>
 
             {/* Phone */}
-            <motion.div className="glass-card gradient-border rounded-2xl p-6 mb-8"
+            <motion.div className="glass-card gradient-border rounded-2xl p-5 mb-6"
               variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
               <p className="font-mono text-xs uppercase tracking-widest mb-1" style={{ color: 'rgba(255,255,255,0.35)' }}>Phone / WhatsApp</p>
-              <a href="tel:+919342626096" className="font-semibold hover:underline" style={{ color: '#7C3AED' }}>
+              <a href="tel:+919342626096" className="font-semibold hover:underline text-sm sm:text-base" style={{ color: '#7C3AED' }}>
                 +91 93426 26096
               </a>
             </motion.div>
 
             {/* Socials */}
-            <motion.div className="flex gap-3"
+            <motion.div className="flex flex-wrap gap-3"
               variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
               {socials.map((s) => (
                 <motion.a
@@ -317,7 +319,7 @@ const Contact = () => {
                 </button>
               </motion.div>
             ) : (
-              <form ref={formRef} onSubmit={handleSubmit} className="glass-card gradient-border rounded-2xl p-8 space-y-5" noValidate>
+              <form ref={formRef} onSubmit={handleSubmit} className="glass-card gradient-border rounded-2xl p-6 sm:p-8 space-y-5" noValidate>
                 <Field label="Your Name"  name="name"    value={form.name}    onChange={handleChange} touched={touched.name} />
                 <Field label="Email"      name="email"   type="email" value={form.email}   onChange={handleChange} touched={touched.email} />
                 <Field label="Message"    name="message" rows={5}     value={form.message} onChange={handleChange} touched={touched.message} />

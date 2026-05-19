@@ -76,13 +76,13 @@ const projects = [
 
 /* ── Browser Frame mock ──────────────────────────────── */
 const BrowserFrame = ({ accent, status, title, image }) => (
-  <div className="browser-frame mx-6 mt-6 mb-0 overflow-hidden group relative bg-[#050510]">
+  <div className="browser-frame mx-4 sm:mx-6 mt-4 sm:mt-6 mb-0 overflow-hidden group relative bg-[#050510]">
     <div className="browser-bar relative z-20">
       <div className="browser-dot" style={{ background: '#FF5F57' }} />
       <div className="browser-dot" style={{ background: '#FFBD2E' }} />
       <div className="browser-dot" style={{ background: '#28CA41' }} />
       <div
-        className="flex-1 mx-3 px-3 py-1 rounded-md text-xs font-mono truncate"
+        className="flex-1 mx-3 px-3 py-1 rounded-md text-[10px] font-mono truncate"
         style={{ background: 'rgba(255,255,255,0.04)', color: 'rgba(255,255,255,0.3)' }}
       >
         {title.toLowerCase().replace(' ', '-')}.dev
@@ -95,11 +95,10 @@ const BrowserFrame = ({ accent, status, title, image }) => (
       )}
     </div>
     
-    {/* Page content: Premium full-space view */}
-    <div className="relative aspect-video flex items-center justify-center overflow-hidden">
+    {/* Page content */}
+    <div className="relative h-36 sm:h-44 flex items-center justify-center overflow-hidden">
       {image ? (
         <>
-          {/* Blurred background filling the whole space */}
           <motion.img
             src={image}
             alt=""
@@ -107,8 +106,6 @@ const BrowserFrame = ({ accent, status, title, image }) => (
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.4 }}
           />
-          
-          {/* Main logo nicely contained and centered */}
           <motion.img
             src={image}
             alt={title}
@@ -133,8 +130,6 @@ const BrowserFrame = ({ accent, status, title, image }) => (
           ))}
         </div>
       )}
-      
-      {/* Glossy overlay */}
       <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent opacity-30 pointer-events-none" />
     </div>
   </div>
@@ -201,7 +196,7 @@ const ProjectCard = ({ project, index }) => {
       <BrowserFrame accent={project.accent} status={project.status} title={project.title} image={project.image} />
 
       {/* Card body */}
-      <div className="p-7 flex flex-col flex-1">
+      <div className="p-5 sm:p-7 flex flex-col flex-1">
         {/* Badge + title */}
         <div className="flex items-start justify-between mb-3">
           <div>
@@ -223,8 +218,8 @@ const ProjectCard = ({ project, index }) => {
           </p>
         </div>
 
-        {/* Highlights 2×2 */}
-        <div className="grid grid-cols-2 gap-2 mb-5">
+        {/* Highlights 1x1 on mobile, 2x2 on sm+ */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-5">
           {project.highlights.map((h) => (
             <div
               key={h.text}
@@ -254,8 +249,8 @@ const ProjectCard = ({ project, index }) => {
           ))}
         </div>
 
-        {/* Buttons */}
-        <div className="flex gap-3 mt-auto">
+        {/* Buttons stacked on mobile */}
+        <div className="flex flex-col sm:flex-row gap-3 mt-auto">
           {project.live ? (
             <motion.a
               href={project.live}
@@ -289,20 +284,21 @@ const ProjectCard = ({ project, index }) => {
 
 /* ── Projects section ────────────────────────────────── */
 const Projects = () => (
-  <section id="projects" className="py-20 lg:py-32 relative">
+  <section id="projects" className="py-24 sm:py-32 relative">
     <div className="absolute inset-0 pointer-events-none"
       style={{ background: 'radial-gradient(ellipse 60% 40% at 50% 50%, rgba(124,58,237,0.04), transparent)' }} />
 
     <div className="section-container">
-      <motion.div className="flex items-center gap-3 mb-4"
+      {/* Label */}
+      <motion.div className="flex items-center gap-3 mb-6 sm:mb-4"
         initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-        <span className="font-mono text-sm" style={{ color: '#00F5FF' }}>03.</span>
-        <span className="font-mono text-sm uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.35)' }}>Projects</span>
+        <span className="font-mono text-xs sm:text-sm" style={{ color: '#00F5FF' }}>03.</span>
+        <span className="font-mono text-[10px] sm:text-sm uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.35)' }}>Projects</span>
       </motion.div>
 
       <motion.h2
-        className="font-display font-black text-white mb-3"
-        style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)' }}
+        className="font-display font-black text-white mb-6 sm:mb-3 leading-tight"
+        style={{ fontSize: 'clamp(1.8rem, 8vw, 3rem)' }}
         initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
         Things I've <span className="neon-text">Built</span>
       </motion.h2>
@@ -313,7 +309,7 @@ const Projects = () => (
         Real-world applications powered by AI, real-time tech, and a love for clean UX.
       </motion.p>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
         {projects.map((project, i) => (
           <ProjectCard key={project.id} project={project} index={i} />
         ))}

@@ -64,7 +64,7 @@ const SkillCard = ({ skill, index }) => (
     exit={{ opacity: 0, scale: 0.7 }}
     transition={{ delay: index * 0.04, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
     whileHover={{ scale: 1.08, y: -4 }}
-    className="relative flex flex-col items-center gap-2 p-4 rounded-2xl cursor-default group"
+    className="relative flex flex-col items-center gap-2 p-3 rounded-2xl cursor-default group"
     style={{
       background: 'rgba(10,10,26,0.7)',
       border: '1px solid rgba(255,255,255,0.07)',
@@ -108,19 +108,19 @@ const Skills = () => {
   const filtered = active === 'All' ? skills : skills.filter(s => s.category === active);
 
   return (
-    <section id="skills" className="py-20 lg:py-32 relative">
+    <section id="skills" className="py-16 sm:py-24 lg:py-32 relative">
       <div className="section-container">
         {/* Label */}
         <motion.div
-          className="flex items-center gap-3 mb-4"
+          className="flex items-center gap-3 mb-6 sm:mb-4"
           initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <span className="font-mono text-sm" style={{ color: '#00F5FF' }}>02.</span>
-          <span className="font-mono text-sm uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.35)' }}>Skills</span>
+          <span className="font-mono text-xs sm:text-sm" style={{ color: '#00F5FF' }}>02.</span>
+          <span className="font-mono text-[10px] sm:text-sm uppercase tracking-widest" style={{ color: 'rgba(255,255,255,0.35)' }}>Skills</span>
         </motion.div>
 
         <motion.h2
-          className="font-display font-black text-white mb-3"
-          style={{ fontSize: 'clamp(2rem, 4.5vw, 3rem)' }}
+          className="font-display font-black text-white mb-6 sm:mb-3 leading-tight"
+          style={{ fontSize: 'clamp(1.8rem, 8vw, 3rem)' }}
           initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           Tech <span className="neon-text">Stack</span>
         </motion.h2>
@@ -161,7 +161,7 @@ const Skills = () => {
         {/* ── Skills Grid ── */}
         <motion.div
           layout
-          className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3"
+          className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 sm:gap-3"
         >
           <AnimatePresence mode="popLayout">
             {filtered.map((skill, i) => (

@@ -17,17 +17,31 @@
 /* ─── Reset ──────────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { 
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
 
 body {
   background-color: var(--bg);
   color: var(--text);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
-  cursor: none;
   -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
   position: relative;
+  /* Restore cursor on mobile — custom cursor is disabled */
+  cursor: auto;
+  touch-action: manipulation;
 }
+
+/* Restore normal cursor on touch devices */
+@media (hover: none) {
+  body { cursor: auto; }
+  .cursor-dot, .cursor-ring { display: none !important; }
+}
+
 
 /* ── Background Patterns ────────────────────────────────────── */
 .bg-grid {
@@ -213,7 +227,12 @@ body {
 }
 
 /* ─── Section layout ─────────────────────────────────────────── */
-.section-container { @apply max-w-7xl mx-auto px-6 lg:px-12; }
+.section-container { 
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-12; 
+  width: 100%;
+  min-width: 0;
+}
+
 
 /* ─── Scroll progress ────────────────────────────────────────── */
 .scroll-progress {
@@ -453,3 +472,87 @@ body {
   0%   { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILE RESPONSIVENESS — Global fixes
+   ═══════════════════════════════════════════════════════════ */
+
+/* Prevent ALL horizontal overflow */
+*, *::before, *::after {
+  max-width: 100%;
+}
+
+/* Images and media always contained */
+img, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Fix hex grid on mobile */
+@media (max-width: 640px) {
+  .hex {
+    width: 80px;
+    height: 92px;
+  }
+
+  /* Reduce grain animation cost on mobile */
+  .bg-grain {
+    animation: none;
+  }
+
+  /* Tighter cert ribbon on mobile */
+  .cert-ribbon {
+    gap: 12px;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .cert-card {
+    min-width: 200px;
+    scroll-snap-align: start;
+    padding: 16px 18px;
+  }
+
+  /* Reduce glow intensity on mobile for perf */
+  .glow-cyan  { box-shadow: 0 0 12px rgba(0,245,255,0.2); }
+  .glow-violet{ box-shadow: 0 0 12px rgba(124,58,237,0.2); }
+  .glow-rose  { box-shadow: 0 0 12px rgba(255,45,107,0.2); }
+
+  /* Better glass-card on small screens */
+  .glass-card:hover {
+    transform: none;
+  }
+
+  /* Improve touch targets */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Tighter section divider */
+  .section-divider {
+    max-width: 95%;
+    margin: 0 auto;
+  }
+
+  /* Browser frame text doesn't overflow */
+  .browser-bar {
+    padding: 8px 10px;
+  }
+
+  /* Nav active dot stays visible */
+  .nav-active-dot {
+    display: none;
+  }
+}
+
+/* Safe area insets for notched phones */
+@supports (padding: env(safe-area-inset-left)) {
+  .section-container {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+}
+
