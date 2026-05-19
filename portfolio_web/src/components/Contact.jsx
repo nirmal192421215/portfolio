@@ -208,9 +208,15 @@ const Contact = () => {
       .catch((error) => {
         setSending(false);
         console.error('EmailJS Direct Error:', error.message);
-        alert(`Failed to send: ${error.message}`);
+        
+        // Premium UX fallback: if automated email fails, open standard mail client so they don't lose their input
+        const mailtoUrl = `mailto:nirmalkumar00727@gmail.com?subject=Portfolio Message from ${encodeURIComponent(form.name)}&body=${encodeURIComponent(form.message)}%0D%0A%0D%0A(From: ${encodeURIComponent(form.email)})`;
+        
+        alert(`Notice: Automated message delivery service is temporarily offline.\n\nOpening your default email client to send this message directly so you don't lose your typed draft.`);
+        window.location.href = mailtoUrl;
       });
   };
+
 
   return (
     <section id="contact" className="py-16 sm:py-20 lg:py-32 relative">
