@@ -14,7 +14,7 @@ const AvailabilityBadge = () => {
       const utc = now.getTime() + now.getTimezoneOffset() * 60000;
       const ist = new Date(utc + istOffset * 60000);
       const hour = ist.getHours();
-      setStatus(hour >= 8 && hour < 22 ? 'online' : 'away');
+      setStatus(hour >= 8 || hour < 1 ? 'online' : 'away');
     };
     check();
     const id = setInterval(check, 60000);
