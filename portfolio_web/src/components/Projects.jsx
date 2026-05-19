@@ -218,8 +218,8 @@ const ProjectCard = ({ project, index }) => {
           </p>
         </div>
 
-        {/* Highlights 1x1 on mobile, 2x2 on sm+ */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-5">
+        {/* Highlights 2x2 */}
+        <div className="grid grid-cols-2 gap-2 mb-5">
           {project.highlights.map((h) => (
             <div
               key={h.text}

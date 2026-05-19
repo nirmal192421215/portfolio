@@ -182,28 +182,24 @@ const Certifications = () => {
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           Academic &amp; <span className="neon-text">Technical Credentials</span>
         </motion.h2>
-        <motion.p className="mb-16 max-w-md" style={{ color: 'rgba(255,255,255,0.45)' }}
+        <motion.p className="mb-8 sm:mb-16 max-w-md text-sm sm:text-base" style={{ color: 'rgba(255,255,255,0.45)' }}
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           A collection of verified skills and accomplishments earned through dedicated learning and project building.
         </motion.p>
 
-        {/* ── Cert Ribbon ── */}
-        <div className="mb-10 sm:mb-16 -mx-4 sm:mx-0">
-          <div
-            className="cert-ribbon px-4 sm:px-0 pb-4 sm:pb-8"
-            style={{
-              display: 'flex',
-              gap: '12px',
-              overflowX: 'auto',
-              scrollSnapType: 'x mandatory',
-              WebkitOverflowScrolling: 'touch',
-              scrollbarWidth: 'thin',
-            }}
-          >
+        {/* ── Cert Cards ── */}
+        {/* Mobile: vertical stack grid */}
+        <div className="grid grid-cols-1 gap-4 mb-10 sm:hidden">
+          {certs.map((cert, i) => (
+            <CertCard key={cert.title} cert={cert} index={i} />
+          ))}
+        </div>
+
+        {/* Desktop sm+: horizontal scrollable ribbon */}
+        <div className="hidden sm:block mb-16">
+          <div className="cert-ribbon pb-8">
             {certs.map((cert, i) => (
-              <div key={cert.title} style={{ scrollSnapAlign: 'start', flexShrink: 0, width: 'clamp(220px, 82vw, 280px)' }}>
-                <CertCard cert={cert} index={i} />
-              </div>
+              <CertCard key={cert.title} cert={cert} index={i} />
             ))}
           </div>
         </div>
