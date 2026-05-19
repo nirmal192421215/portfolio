@@ -178,7 +178,7 @@ const Certifications = () => {
 
         <motion.h2
           className="font-display font-black text-white mb-3 leading-tight"
-          style={{ fontSize: 'clamp(1.6rem, 6vw, 3.5rem)' }}
+          style={{ fontSize: 'clamp(1.5rem, 5.5vw, 3.5rem)' }}
           variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
           Academic &amp; <span className="neon-text">Technical Credentials</span>
         </motion.h2>
@@ -188,10 +188,22 @@ const Certifications = () => {
         </motion.p>
 
         {/* ── Cert Ribbon ── */}
-        <div className="cert-ribbon-container mb-10 sm:mb-16">
-          <div className="cert-ribbon pb-4 sm:pb-8">
+        <div className="mb-10 sm:mb-16 -mx-4 sm:mx-0">
+          <div
+            className="cert-ribbon px-4 sm:px-0 pb-4 sm:pb-8"
+            style={{
+              display: 'flex',
+              gap: '12px',
+              overflowX: 'auto',
+              scrollSnapType: 'x mandatory',
+              WebkitOverflowScrolling: 'touch',
+              scrollbarWidth: 'thin',
+            }}
+          >
             {certs.map((cert, i) => (
-              <CertCard key={cert.title} cert={cert} index={i} />
+              <div key={cert.title} style={{ scrollSnapAlign: 'start', flexShrink: 0, width: 'clamp(220px, 82vw, 280px)' }}>
+                <CertCard cert={cert} index={i} />
+              </div>
             ))}
           </div>
         </div>

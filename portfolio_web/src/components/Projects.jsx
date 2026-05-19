@@ -237,11 +237,11 @@ const ProjectCard = ({ project, index }) => {
         </div>
 
         {/* Tech pills */}
-        <div className="flex flex-wrap gap-1.5 mb-6">
+        <div className="flex flex-wrap gap-1.5 mb-5">
           {project.tech.map((t) => (
             <span
               key={t}
-              className="font-mono text-[11px] px-2.5 py-1 rounded-full"
+              className="font-mono text-[10px] px-2.5 py-1 rounded-full"
               style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.09)', color: 'rgba(255,255,255,0.45)' }}
             >
               {t}
@@ -249,20 +249,20 @@ const ProjectCard = ({ project, index }) => {
           ))}
         </div>
 
-        {/* Buttons stacked on mobile */}
-        <div className="flex flex-col sm:flex-row gap-3 mt-auto">
+        {/* Buttons */}
+        <div className="flex flex-row gap-2 mt-auto">
           {project.live ? (
             <motion.a
               href={project.live}
               target="_blank" rel="noopener noreferrer"
-              className="btn-primary flex-1 py-2.5 rounded-xl text-white text-sm font-semibold text-center flex items-center justify-center gap-2 relative z-10 overflow-hidden"
+              className="btn-primary flex-1 py-3 rounded-xl text-white text-sm font-semibold text-center flex items-center justify-center gap-2 relative z-10 overflow-hidden"
               whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
             >
               <span className="relative z-10 flex items-center gap-2"><ExternalIcon /> Live Demo</span>
             </motion.a>
           ) : (
             <div
-              className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-center flex items-center justify-center gap-2"
+              className="flex-1 py-3 rounded-xl text-sm font-semibold text-center flex items-center justify-center gap-2"
               style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.3)' }}
             >
               🚧 Coming Soon
@@ -271,7 +271,7 @@ const ProjectCard = ({ project, index }) => {
           <motion.a
             href={project.github}
             target="_blank" rel="noopener noreferrer"
-            className="btn-ghost flex-1 py-2.5 rounded-xl text-white/70 text-sm font-semibold text-center flex items-center justify-center gap-2"
+            className="btn-ghost flex-1 py-3 rounded-xl text-white/70 text-sm font-semibold text-center flex items-center justify-center gap-2"
             whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
           >
             <GithubIcon /> GitHub
