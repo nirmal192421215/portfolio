@@ -60,7 +60,7 @@ const TiltCard = ({ children }) => {
 /* ── Stats ─────────────────────────────────────────────────── */
 const stats = [
   { raw: '2',  suffix: '+', label: 'Hackathons' },
-  { raw: '5',  suffix: '+', label: 'Projects Built' },
+  { raw: '8',  suffix: '+', label: 'Projects Built' },
   { raw: '4',  suffix: '+', label: 'Certifications' },
   { raw: '3',  suffix: '+', label: 'AI Integrations' },
 ];
@@ -71,6 +71,7 @@ const timeline = [
   { year: '2025', event: 'Mastering Java',           detail: 'Started deep dive into Java and backend logic (Sep 2025).' },
   { year: '2026', event: 'Built Krythion',            detail: 'Launched gamified AI learning platform (Jan 2026).' },
   { year: '2026', event: 'Built MindMeter',           detail: 'Developed AI cognitive wellness system (Mar 2026).' },
+  { year: '2026', event: 'Freelance Work',            detail: 'Delivered web applications for multiple clients (Mid 2026).' },
   { year: '2026', event: 'Hackathon Streak',         detail: 'Participated in 1st and 2nd major hackathons.' },
   { year: '2028', event: 'Engineering Graduate',     detail: 'Ready to innovate the tech world (Estimated Graduation).' },
 ];
@@ -143,7 +144,7 @@ const About = () => {
             <div className="space-y-4 mb-10 text-sm sm:text-base leading-relaxed">
               {[
                 "I'm Nirmal Kumar N, a B.Tech Information Technology student from SIMATS Engineering, Thandalam. Coming from Chennai, I'm passionate about the intersection of AI and real-world problem solving.",
-                "I started my engineering journey in 2024. In September 2025, I began mastering Java, which evolved into building comprehensive systems like MindMeter and Krythion in early 2026.",
+                "I started my engineering journey in 2024. In September 2025, I began mastering Java, which evolved into building comprehensive systems like MindMeter and Krythion in early 2026, and successfully delivering freelance web projects for clients.",
                 "I actively participate in hackathons to ship fast and stay sharp, constantly learning new tools and frameworks to solve complex challenges.",
               ].map((text, i) => (
                 <motion.p
@@ -268,7 +269,7 @@ const About = () => {
                   <div>
                     <h3 className="font-semibold text-white mb-1">Impact Driven</h3>
                     <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                      Built MindMeter and Krythion in 2026 to solve real-world cognitive and educational challenges.
+                      Built MindMeter, Krythion, and multiple freelance client projects in 2026 to deliver real-world value.
                     </p>
                   </div>
                 </div>
