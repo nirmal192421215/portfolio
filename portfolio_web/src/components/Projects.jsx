@@ -292,10 +292,10 @@ const ProjectCard = ({ project, index }) => {
   const onMouseLeave = () => { rx.set(0); ry.set(0); setHovered(false); };
 
   return (
-    <div style={{ isolation: 'isolate' }}>
+    <div style={{ isolation: 'isolate' }} className="h-full">
     <motion.div
       ref={cardRef}
-      className={`relative glass-card rounded-3xl overflow-hidden flex flex-col ${project.comingSoon ? 'opacity-75' : ''}`}
+      className={`relative h-full glass-card rounded-3xl overflow-hidden flex flex-col ${project.comingSoon ? 'opacity-75' : ''}`}
       style={{ rotateX: srx, rotateY: sry, transformStyle: 'preserve-3d', perspective: 800 }}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -339,21 +339,21 @@ const ProjectCard = ({ project, index }) => {
         {/* Project meta info strip */}
         {(project.client || project.hackathon || project.personal || project.demo) && (
           <div
-            className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-4 px-3 py-2 rounded-xl text-[10px] font-mono"
+            className="flex items-center gap-1.5 sm:gap-2 mb-4 px-2 py-1.5 rounded-xl text-[8.5px] sm:text-[9.5px] font-mono whitespace-nowrap overflow-hidden"
             style={{
               background: `${project.accent}0d`,
               border: `1px solid ${project.accent}28`,
               color: project.accent,
             }}
           >
-            {project.hackathon && <span className="whitespace-nowrap">🏆 Hackathon Project</span>}
-            {project.client   && <span className="whitespace-nowrap">👤 Client Project</span>}
-            {project.personal && <span className="whitespace-nowrap">🧪 Personal Project</span>}
-            {project.demo     && <span className="whitespace-nowrap">🛠️ Demo Project</span>}
+            {project.hackathon && <span>🏆 Hackathon</span>}
+            {project.client   && <span>👤 Client</span>}
+            {project.personal && <span>🧪 Personal</span>}
+            {project.demo     && <span>🛠️ Demo</span>}
             <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
-            <span className="whitespace-nowrap">⏱ {project.duration}</span>
+            <span>⏱ {project.duration}</span>
             <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
-            <span className="whitespace-nowrap">🎯 {project.timeline}</span>
+            <span className="truncate">🎯 {project.timeline}</span>
           </div>
         )}
         {/* Badge + title */}
