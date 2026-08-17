@@ -339,7 +339,7 @@ const ProjectCard = ({ project, index }) => {
         {/* Project meta info strip */}
         {(project.client || project.hackathon || project.personal || project.demo) && (
           <div
-            className="flex items-center gap-1.5 sm:gap-2 mb-4 px-2 py-1.5 rounded-xl text-[8.5px] sm:text-[9.5px] font-mono whitespace-nowrap overflow-hidden"
+            className="inline-flex w-fit max-w-full items-center gap-1 sm:gap-1.5 mb-4 px-1.5 sm:px-2 py-1.5 rounded-xl text-[7.5px] sm:text-[8.5px] font-mono whitespace-nowrap overflow-hidden"
             style={{
               background: `${project.accent}0d`,
               border: `1px solid ${project.accent}28`,
