@@ -15,6 +15,28 @@ const ExternalIcon = () => (
 
 const projects = [
   {
+    id: 0,
+    title: 'Bind Build Studio',
+    subtitle: 'Construction Company Platform',
+    description: 'A premium corporate web platform delivered for a construction client. Features high-end architectural aesthetics, service portfolios, and custom domain integration.',
+    tech: ['React', 'CSS', 'Vite'],
+    highlights: [
+      { icon: '🏗️', text: 'High-end corporate UI/UX' },
+      { icon: '🌐', text: 'Custom domain integration' },
+      { icon: '🏢', text: 'Service & project portfolio' },
+      { icon: '📱', text: 'Fully responsive performance' },
+    ],
+    live:   'https://bindconstructions.com',
+    github: 'https://github.com/nirmal192421215',
+    image:  '/projects/bind_builds.jpg',
+    accent: '#F59E0B',
+    badge:  'FEATURED',
+    status: 'Live',
+    client: true,
+    duration: '1 Week',
+    timeline: 'Start of 3rd Year',
+  },
+  {
     id: 1,
     title: 'Krythion',
     subtitle: 'Gamified AI Learning Platform',
