@@ -182,7 +182,7 @@ const projects = [
     ],
     live:   'https://grocery-dusky-alpha.vercel.app/',
     github: 'https://github.com/nirmal192421215',
-    image:  null,
+    image:  '/projects/grocery_shop.jpg',
     accent: '#22C55E',
     badge:  'LIVE',
     status: 'Live',
