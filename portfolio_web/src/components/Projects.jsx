@@ -70,6 +70,9 @@ const projects = [
     accent: '#10B981',
     badge:  'LIVE',
     status: 'Live',
+    client: true,
+    duration: '1 Week',
+    timeline: 'End of 2nd Year',
   },
   {
     id: 4,
@@ -89,6 +92,9 @@ const projects = [
     accent: '#F59E0B',
     badge:  'LIVE',
     status: 'Live',
+    client: true,
+    duration: '1 Week',
+    timeline: 'End of 2nd Year',
   },
   {
     id: 5,
@@ -146,6 +152,9 @@ const projects = [
     accent: '#EC4899',
     badge:  'LIVE',
     status: 'Live',
+    client: true,
+    duration: '1 Week',
+    timeline: 'End of 2nd Year',
   },
   {
     id: 8,
@@ -292,6 +301,23 @@ const ProjectCard = ({ project, index }) => {
 
       {/* Card body */}
       <div className="p-5 sm:p-7 flex flex-col flex-1">
+        {/* Client info strip */}
+        {project.client && (
+          <div
+            className="flex items-center gap-3 mb-4 px-3 py-2 rounded-xl text-[10px] font-mono"
+            style={{
+              background: `${project.accent}0d`,
+              border: `1px solid ${project.accent}28`,
+              color: project.accent,
+            }}
+          >
+            <span>👤 Client Project</span>
+            <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
+            <span>⏱ {project.duration}</span>
+            <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
+            <span>🎓 {project.timeline}</span>
+          </div>
+        )}
         {/* Badge + title */}
         <div className="flex items-start justify-between mb-3">
           <div>
