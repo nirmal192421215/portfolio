@@ -78,7 +78,7 @@ const projects = [
     status: 'Live',
     client: true,
     duration: '1 Week',
-    timeline: 'End of 2nd Year',
+    timeline: 'End 2nd Year',
   },
   {
     id: 4,
@@ -100,7 +100,7 @@ const projects = [
     status: 'Live',
     client: true,
     duration: '1 Week',
-    timeline: 'End of 2nd Year',
+    timeline: 'End 2nd Year',
   },
   {
     id: 5,
@@ -122,7 +122,7 @@ const projects = [
     status: 'Live',
     demo: true,
     duration: '3-4 Days',
-    timeline: 'Mid of 2nd Year',
+    timeline: 'Mid 2nd Year',
   },
   {
     id: 6,
@@ -144,7 +144,7 @@ const projects = [
     status: 'Live',
     demo: true,
     duration: '3-4 Days',
-    timeline: 'Mid of 2nd Year',
+    timeline: 'Mid 2nd Year',
   },
   {
     id: 7,
@@ -166,7 +166,7 @@ const projects = [
     status: 'Live',
     client: true,
     duration: '1 Week',
-    timeline: 'End of 2nd Year',
+    timeline: 'End 2nd Year',
   },
   {
     id: 8,
@@ -188,7 +188,7 @@ const projects = [
     status: 'Live',
     demo: true,
     duration: '3-4 Days',
-    timeline: 'Mid of 2nd Year',
+    timeline: 'Mid 2nd Year',
   },
   {
     id: 9,
@@ -339,7 +339,7 @@ const ProjectCard = ({ project, index }) => {
         {/* Project meta info strip */}
         {(project.client || project.hackathon || project.personal || project.demo) && (
           <div
-            className="inline-flex w-fit max-w-full items-center gap-1 sm:gap-1.5 mb-4 px-1.5 sm:px-2 py-1.5 rounded-xl text-[7.5px] sm:text-[8.5px] font-mono whitespace-nowrap overflow-hidden"
+            className="inline-flex w-fit max-w-full items-center gap-1 mb-4 px-1.5 py-1.5 rounded-xl text-[7px] sm:text-[8px] tracking-tight font-mono whitespace-nowrap overflow-hidden"
             style={{
               background: `${project.accent}0d`,
               border: `1px solid ${project.accent}28`,
