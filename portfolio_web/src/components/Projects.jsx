@@ -339,21 +339,21 @@ const ProjectCard = ({ project, index }) => {
         {/* Project meta info strip */}
         {(project.client || project.hackathon || project.personal || project.demo) && (
           <div
-            className="flex items-center gap-3 mb-4 px-3 py-2 rounded-xl text-[10px] font-mono"
+            className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-4 px-3 py-2 rounded-xl text-[10px] font-mono"
             style={{
               background: `${project.accent}0d`,
               border: `1px solid ${project.accent}28`,
               color: project.accent,
             }}
           >
-            {project.hackathon && <span>🏆 Hackathon Project</span>}
-            {project.client   && <span>👤 Client Project</span>}
-            {project.personal && <span>🧪 Personal Project</span>}
-            {project.demo     && <span>🛠️ Demo Project</span>}
+            {project.hackathon && <span className="whitespace-nowrap">🏆 Hackathon Project</span>}
+            {project.client   && <span className="whitespace-nowrap">👤 Client Project</span>}
+            {project.personal && <span className="whitespace-nowrap">🧪 Personal Project</span>}
+            {project.demo     && <span className="whitespace-nowrap">🛠️ Demo Project</span>}
             <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
-            <span>⏱ {project.duration}</span>
+            <span className="whitespace-nowrap">⏱ {project.duration}</span>
             <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
-            <span>🎯 {project.timeline}</span>
+            <span className="whitespace-nowrap">🎯 {project.timeline}</span>
           </div>
         )}
         {/* Badge + title */}
