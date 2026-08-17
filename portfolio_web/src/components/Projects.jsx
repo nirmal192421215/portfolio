@@ -32,6 +32,9 @@ const projects = [
     accent: '#00F5FF',
     badge:  'FEATURED',
     status: 'Live',
+    hackathon: true,
+    duration: '1 Month',
+    timeline: '1st Project',
   },
   {
     id: 2,
@@ -51,6 +54,9 @@ const projects = [
     accent: '#7C3AED',
     badge:  'FEATURED',
     status: 'Live',
+    personal: true,
+    duration: '4 Days',
+    timeline: 'Personal Use',
   },
   {
     id: 3,
@@ -302,8 +308,8 @@ const ProjectCard = ({ project, index }) => {
 
       {/* Card body */}
       <div className="p-5 sm:p-7 flex flex-col flex-1">
-        {/* Client info strip */}
-        {project.client && (
+        {/* Project meta info strip */}
+        {(project.client || project.hackathon || project.personal) && (
           <div
             className="flex items-center gap-3 mb-4 px-3 py-2 rounded-xl text-[10px] font-mono"
             style={{
@@ -312,11 +318,13 @@ const ProjectCard = ({ project, index }) => {
               color: project.accent,
             }}
           >
-            <span>👤 Client Project</span>
+            {project.hackathon && <span>🏆 Hackathon Project</span>}
+            {project.client   && <span>👤 Client Project</span>}
+            {project.personal && <span>🧪 Personal Project</span>}
             <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
             <span>⏱ {project.duration}</span>
             <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
-            <span>🎓 {project.timeline}</span>
+            <span>🎯 {project.timeline}</span>
           </div>
         )}
         {/* Badge + title */}
