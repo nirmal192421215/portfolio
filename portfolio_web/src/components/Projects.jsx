@@ -120,6 +120,9 @@ const projects = [
     accent: '#3B82F6',
     badge:  'LIVE',
     status: 'Live',
+    demo: true,
+    duration: '3-4 Days',
+    timeline: 'Mid of 2nd Year',
   },
   {
     id: 6,
@@ -139,6 +142,9 @@ const projects = [
     accent: '#EF4444',
     badge:  'LIVE',
     status: 'Live',
+    demo: true,
+    duration: '3-4 Days',
+    timeline: 'Mid of 2nd Year',
   },
   {
     id: 7,
@@ -164,6 +170,28 @@ const projects = [
   },
   {
     id: 8,
+    title: 'Grocery Shop',
+    subtitle: 'Online Grocery Store',
+    description: 'A clean and responsive online grocery shopping platform with product listings, cart management, and a smooth checkout experience.',
+    tech: ['React', 'CSS', 'Vite'],
+    highlights: [
+      { icon: '🛒', text: 'Product Listings' },
+      { icon: '🛑', text: 'Cart Management' },
+      { icon: '💳', text: 'Checkout Flow' },
+      { icon: '📱', text: 'Responsive Design' },
+    ],
+    live:   'https://grocery-dusky-alpha.vercel.app/',
+    github: 'https://github.com/nirmal192421215',
+    image:  null,
+    accent: '#22C55E',
+    badge:  'LIVE',
+    status: 'Live',
+    demo: true,
+    duration: '3-4 Days',
+    timeline: 'Mid of 2nd Year',
+  },
+  {
+    id: 9,
     title: 'Next Project',
     subtitle: 'In Development',
     description: "Something new is brewing. Always building — the next project is in the pipeline, pushing AI and full-stack development further into unexplored territory.",
@@ -309,7 +337,7 @@ const ProjectCard = ({ project, index }) => {
       {/* Card body */}
       <div className="p-5 sm:p-7 flex flex-col flex-1">
         {/* Project meta info strip */}
-        {(project.client || project.hackathon || project.personal) && (
+        {(project.client || project.hackathon || project.personal || project.demo) && (
           <div
             className="flex items-center gap-3 mb-4 px-3 py-2 rounded-xl text-[10px] font-mono"
             style={{
@@ -321,6 +349,7 @@ const ProjectCard = ({ project, index }) => {
             {project.hackathon && <span>🏆 Hackathon Project</span>}
             {project.client   && <span>👤 Client Project</span>}
             {project.personal && <span>🧪 Personal Project</span>}
+            {project.demo     && <span>🛠️ Demo Project</span>}
             <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
             <span>⏱ {project.duration}</span>
             <span style={{ color: 'rgba(255,255,255,0.2)' }}>|</span>
