@@ -258,6 +258,7 @@ const ProjectCard = ({ project, index }) => {
   const onMouseLeave = () => { rx.set(0); ry.set(0); setHovered(false); };
 
   return (
+    <div style={{ isolation: 'isolate' }}>
     <motion.div
       ref={cardRef}
       className={`relative glass-card rounded-3xl overflow-hidden flex flex-col ${project.comingSoon ? 'opacity-75' : ''}`}
@@ -400,6 +401,7 @@ const ProjectCard = ({ project, index }) => {
         </div>
       </div>
     </motion.div>
+    </div>
   );
 };
 
